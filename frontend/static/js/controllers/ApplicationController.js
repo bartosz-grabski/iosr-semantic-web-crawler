@@ -1,4 +1,4 @@
-controllers.controller('ApplicationController', function ($scope, loginService) {
+controllers.controller('ApplicationController', function ($scope, $location, loginService) {
 
     loginService.getLoggedInUser(function (res) {
         $scope.currentUser = res.user_name;
@@ -16,6 +16,7 @@ controllers.controller('ApplicationController', function ($scope, loginService) 
         var onSuccess = function () {
             console.log("[INFO] Successful logout");
             $scope.currentUser = null;
+            $location.path('/');
         };
 
         var onFailure = function () {

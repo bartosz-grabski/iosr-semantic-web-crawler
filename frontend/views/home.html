@@ -1,0 +1,32 @@
+ <div ng-show="!currentUser" class="jumbotron" ng-controller="HomeController">
+ 	<h1>Web crawler</h1>
+ 	<p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+ 	<p><a href="#/login" class="btn btn-lg btn-success" role="button">Log in</a><a href="#/register" class="btn btn-lg btn-success" style="margin-left:10px" role="button">Register</a></p>
+ </div>
+ <div ng-show="currentUser" ng-controller="SearchController">
+ 	<div class="panel panel-default">
+ 		<div class="panel-heading">
+ 			<h3 class="panel-title">Your searches</h3>
+ 		</div>
+ 		<div class="panel-body">
+ 			<div class="list-group">
+ 				<a href="#" class="list-group-item">Search 1</a>
+ 				<a href="#" class="list-group-item">Search 2</a>
+ 			</div>
+ 		</div>
+ 	</div>
+ 	<div class="panel panel-default">
+ 		<div class="panel-heading">
+ 			<h3 class="panel-title">New search</h3>
+ 		</div>
+ 		<div class="panel-body">
+ 			<form action="#" role="form">
+ 				<div class="form-group">
+ 					<label for="content">Content:</label>
+ 					<input name="content" class="form-control" id="content" placeholder="Enter search">
+ 				</div>
+ 				<button type="submit" class="btn btn-success">Submit</button>
+ 			</form>
+ 		</div>
+ 	</div>
+ </div>

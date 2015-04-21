@@ -2,6 +2,8 @@ var express = require('express');
 var routes = require('./routes');
 var http = require('http');
 var path = require('path');
+var mongoose = require('mongoose');
+var dbConfig = require('./db/dbConfig.json');
 
 var app = express();
 
@@ -20,6 +22,8 @@ app.use(express.session({secret: '1234567890QWERTY'}));
 app.use(app.router);
 
 
+mongoose.connect('mongodb://' + dbConfig["dbHost"] + ":" + dbConfig["dbPort"] + "/" + dbConfig["dbDatabase"]);
+
 // development only
 if ('development' == app.get('env')) {
     app.use(express.errorHandler());
@@ -29,4 +33,12 @@ http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });
 
-app.get('/', routes.index);
+app.get('/',routes.index)
+app.get('/home', routes.index);
+app.get('/register', routes.registerGET);
+app.post('/register', routes.registerPOST);
+app.get('/login', routes.loginGET);
+app.post('/login', routes.loginPOST);
+app.get('/views/:view', routes.view);
+app.get('/loggedUser', routes.loggedUserGET);
+app.get('/logout', routes.logout);
