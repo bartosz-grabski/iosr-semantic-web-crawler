@@ -2,8 +2,9 @@ var express = require('express');
 var routes = require('./routes');
 var http = require('http');
 var path = require('path');
+var config = require('./config');
 var mongoose = require('mongoose');
-var dbConfig = require('./db/dbConfig.json');
+
 
 var app = express();
 
@@ -22,7 +23,7 @@ app.use(express.session({secret: '1234567890QWERTY'}));
 app.use(app.router);
 
 
-mongoose.connect('mongodb://' + dbConfig["dbHost"] + ":" + dbConfig["dbPort"] + "/" + dbConfig["dbDatabase"]);
+mongoose.connect('mongodb://' + config["dbHost"] + ":" + config["dbPort"] + "/" + config["dbDatabase"]);
 
 // development only
 if ('development' == app.get('env')) {

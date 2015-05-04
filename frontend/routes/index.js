@@ -1,16 +1,19 @@
 var User = require('../model/user.js');
+var config = require('../config');
+var http = require('http');
 
 var index = function (req, res) {
     res.render('index');
 };
 
-var loginGET = function (req, res) {
-    res.render('login');
-};
 
 var view = function (req, res) {
     var view = req.params.view;
     res.render(view);
+};
+
+var loginGET = function (req, res) {
+    res.render('login');
 };
 
 var loginPOST = function (req, res) {
@@ -29,7 +32,7 @@ var loginPOST = function (req, res) {
     });
 };
 
-var logoutGET = function (req, res) {
+var logout = function (req, res) {
     delete req.session.user_id;
     res.send(201);
 };
@@ -58,18 +61,19 @@ var loggedUserGET = function (req, res) {
         res.send(user);
         return;
     });
-}
-
-var logout = function (req, res) {
-    delete req.session.user_id;
-    res.send(201);
 };
+
+
+var newSearch = function (req, res) {
+
+};
+
+
 
 module.exports = {
     index: index,
     loginGET: loginGET,
     loginPOST: loginPOST,
-    logoutGET: logoutGET,
     view: view,
     registerPOST: registerPOST,
     registerGET: registerGET,

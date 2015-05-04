@@ -1,5 +1,0 @@
-{
-    "dbPort": 27017,
-    "dbHost": "localhost",
-    "dbDatabase": "geopoll"
-}

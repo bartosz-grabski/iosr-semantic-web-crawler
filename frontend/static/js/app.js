@@ -12,6 +12,10 @@ app.config(['$routeProvider',
                 templateUrl: '/views/login',
                 controller: 'LoginController'
             }).
+            when('/search/:searchId', {
+                templateUrl: '/views/search',
+                controller: 'SearchController'
+            }).
             otherwise({
                 redirectTo: '/home',
                 templateUrl: '/views/home'

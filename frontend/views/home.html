@@ -10,8 +10,7 @@
  		</div>
  		<div class="panel-body">
  			<div class="list-group">
- 				<a href="#" class="list-group-item">Search 1</a>
- 				<a href="#" class="list-group-item">Search 2</a>
+ 				
  			</div>
  		</div>
  	</div>
@@ -20,13 +19,16 @@
  			<h3 class="panel-title">New search</h3>
  		</div>
  		<div class="panel-body">
- 			<form action="#" role="form">
+ 			<form novalidate class="simple-form">
  				<div class="form-group">
  					<label for="content">Content:</label>
- 					<input name="content" class="form-control" id="content" placeholder="Enter search">
+ 					<input name="content" class="form-control" id="content" placeholder="Enter search" ng-model="search">
  				</div>
- 				<button type="submit" class="btn btn-success">Submit</button>
+ 				<input type="submit" class="btn btn-success" ng-click="createSearch(search)">
  			</form>
+ 			<div ng-show="error" class="alert alert-danger">Error submitting search</div>
+ 			<div ng-show="success" class="alert alert-success">Successfully submitted new search.</div>
  		</div>
  	</div>
+
  </div>

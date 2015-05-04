@@ -1,7 +1,17 @@
-controllers.controller('HomeController', function ($scope, $rootScope, $location) {
+controllers.controller('HomeController', function ($scope, $rootScope, $location, searchService) {
 
-    $scope.createPoll = function () {
-    	$location.path('/create');
-    };
+
+
+	$scope.createSearch = function(search) {
+		
+		var onSuccess = function() {
+			
+		}
+
+		var onFailure = function() {
+			
+		}
+
+	}
 
 });
