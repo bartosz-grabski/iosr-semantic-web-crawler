@@ -12,6 +12,8 @@ controllers.controller('HomeController', function ($scope, $rootScope, $location
 			
 		}
 
+		searchService.newSearch(search,onSuccess,onFailure);
+
 	}
 
 });

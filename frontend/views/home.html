@@ -10,6 +10,12 @@
  		</div>
  		<div class="panel-body">
  			<div class="list-group">
+ 				<li class="list-group-item active"><b>Search content</b><span class="search-status" ><b>Status</b></span></li>
+ 				
+ 				<a href="#/search/{{q.query_id}}" class="list-group-item" ng-repeat="q in searches">
+ 					{{q.query_content.length > 80 ? q.query_content.substr(0,80) + '...' : q.query_content}}
+ 					<span ng-class="{running: 'label label-warning search-status', finished: 'label label-success search-status', interrupted: 'label label-danger search-status', submitted:'label label-info search-status', failed: 'label label-danger search-status' }[q.status]">{{q.status}}</span>
+ 				</a>
  				
  			</div>
  		</div>
@@ -26,8 +32,8 @@
  				</div>
  				<input type="submit" class="btn btn-success" ng-click="createSearch(search)">
  			</form>
- 			<div ng-show="error" class="alert alert-danger">Error submitting search</div>
- 			<div ng-show="success" class="alert alert-success">Successfully submitted new search.</div>
+ 			<div ng-show="error" class="alert alert-danger">{{message}}</div>
+ 			<div ng-show="success" class="alert alert-success">{{message}}</div>
  		</div>
  	</div>
 

@@ -2,10 +2,15 @@ services.factory('loginService', function ($http) {
 
     var service = {};
 
+
+
     service.logIn = function (data, onSuccess, onFailure) {
 
         $http.post('/login', data)
-            .success(onSuccess)
+            .success(function(res) {
+                onSuccess(res);
+                service.loggedInUser = res.user_name;
+            })
             .error(onFailure);
     };
 
@@ -14,7 +19,12 @@ services.factory('loginService', function ($http) {
     };
 
     service.getLoggedInUser = function (onSuccess, onFailure) {
-        $http.get('/loggedUser').success(onSuccess).error(onFailure);
+        $http.get('/loggedUser')
+            .success(function(res) {
+                onSuccess(res);
+                service.loggedInUser = res.user_name;
+            })
+            .error(onFailure);
     }
 
     return service;
