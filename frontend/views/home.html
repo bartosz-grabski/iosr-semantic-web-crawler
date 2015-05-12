@@ -10,7 +10,7 @@
  		</div>
  		<div class="panel-body">
  			<div class="list-group">
- 				<li class="list-group-item active"><b>Search content</b><span class="search-status" ><b>Status</b></span></li>
+ 				<li class="list-group-item list-group-item-info"><b>Search content</b><span class="search-status" ><b>Status</b></span></li>
  				
  				<a href="#/search/{{q.query_id}}" class="list-group-item" ng-repeat="q in searches">
  					{{q.query_content.length > 80 ? q.query_content.substr(0,80) + '...' : q.query_content}}
