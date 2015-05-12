@@ -24,6 +24,8 @@ public class POSFilter {
 	static{
 		allowedTags.add("NN");
 		allowedTags.add("VB");
+		allowedTags.add("JJ");
+		allowedTags.add("RB");
 		
 	}
 	

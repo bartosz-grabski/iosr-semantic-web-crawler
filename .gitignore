@@ -58,3 +58,6 @@ target/
 
 #Npm and Node
 node_modules/
+*.class
+semanticAnalyzer/.classpath
+semanticAnalyzer/.project
