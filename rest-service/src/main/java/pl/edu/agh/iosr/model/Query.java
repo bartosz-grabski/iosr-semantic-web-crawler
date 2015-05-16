@@ -15,10 +15,11 @@ public class Query {
     private String queryContent;
     private int crawlingInterval;
     private double accuracyCap;
+    private String status;
 
     @JsonProperty("query_id")
-    public ObjectId getQueryId() {
-        return queryId;
+    public String getQueryId() {
+        return queryId.toString();
     }
 
     public void setQueryId(ObjectId queryId) {
@@ -61,5 +62,12 @@ public class Query {
         this.ownerId = ownerId;
     }
 
+    @JsonProperty("status")
+    public String getStatus() {
+        return status;
+    }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

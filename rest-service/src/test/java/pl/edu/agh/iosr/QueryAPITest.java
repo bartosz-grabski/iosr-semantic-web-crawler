@@ -1,14 +1,13 @@
 package pl.edu.agh.iosr;
 
 import org.glassfish.grizzly.http.server.HttpServer;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
-
-import java.util.concurrent.Executors;
 
 import static org.junit.Assert.assertEquals;
 
@@ -25,10 +24,15 @@ public class QueryAPITest {
     @Before
     public void setUp() throws Exception {
         // start the server
-        server = Main.startServer();
+        server = RestServer.startServer();
         // create the client
         Client c = ClientBuilder.newClient();
-        target = c.target(Main.BASE_URI);
+        target = c.target(RestServer.BASE_URI);
+    }
+
+    @After
+    public void TearDown(){
+        server.shutdown();
     }
 
     @Test
