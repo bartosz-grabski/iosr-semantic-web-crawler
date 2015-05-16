@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class QueryTest {
-    private String objectSerialized = "{\"query_id\":null,\"owner_id\":\"ownerId\",\"query_content\":\"Looking for job\",\"crawling_inverval\":360,\"accuracy_cap\":0.22}";
+    private String objectSerialized = "{\"query_id\":null,\"owner_id\":\"ownerId\",\"query_content\":\"Looking for job\",\"processed_content\":null,\"crawling_inverval\":360,\"accuracy_cap\":0.22,\"status\":null}";
 
     private Query query;
 

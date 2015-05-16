@@ -13,6 +13,7 @@ public class Query {
     private ObjectId queryId;
     private String ownerId;
     private String queryContent;
+    private String processedContent;
     private int crawlingInterval;
     private double accuracyCap;
     private String status;
@@ -69,5 +70,14 @@ public class Query {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @JsonProperty("processed_content")
+    public String getProcessedContent() {
+        return processedContent;
+    }
+
+    public void setProcessedContent(String processedContent) {
+        this.processedContent = processedContent;
     }
 }
