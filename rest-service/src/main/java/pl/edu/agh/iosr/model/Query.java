@@ -19,7 +19,7 @@ public class Query {
 
     @JsonProperty("query_id")
     public String getQueryId() {
-        return queryId.toString();
+        return queryId != null ? queryId.toString() : null;
     }
 
     public void setQueryId(ObjectId queryId) {

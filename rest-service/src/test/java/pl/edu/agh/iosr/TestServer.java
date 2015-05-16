@@ -1,39 +1,18 @@
 package pl.edu.agh.iosr;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
-import pl.edu.agh.iosr.model.MongoConnector;
-import pl.edu.agh.iosr.model.Query;
 import pl.edu.agh.iosr.model.QueryDAO;
 
-import java.io.IOException;
 import java.net.URI;
 
-/**
- * RestServer class.
- */
-public class RestServer {
-    // Base URI the Grizzly HTTP server will listen on
-    public static final String BASE_URI = "http://localhost:8055/myapp/";
+public class TestServer extends RestServer{
 
-    public MongoConnector CONNECTOR;
-
-    public ObjectMapper MAPPER;
-
-    public ObjectWriter WRITER;
-
-    public QueryDAO QUERY_DAO;
-
-    /**
-     * Starts Grizzly HTTP server exposing JAX-RS resources defined in this application.
-     *
-     * @return Grizzly HTTP server.
-     */
+    @Override
     public HttpServer startServer() {
-        CONNECTOR = new MongoConnector("queries", "localhost", 27017, Query.class);
+        CONNECTOR = new TestDatabaseConnector();
         MAPPER = new ObjectMapper();
         WRITER = MAPPER.writerWithDefaultPrettyPrinter();
         QUERY_DAO = new QueryDAO(CONNECTOR.getClient(), CONNECTOR.getMorphia(), CONNECTOR.getDbName());
@@ -45,7 +24,4 @@ public class RestServer {
         // exposing the Jersey application at BASE_URI
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
     }
-
-
 }
-
