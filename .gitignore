@@ -60,3 +60,6 @@ node_modules/
 *.class
 semanticAnalyzer/.classpath
 semanticAnalyzer/.project
+*.iml
+.idea
+.idea/compiler.xml .idea/copyright .idea/iosr-semantic-web-crawler.iml .idea/libraries .idea/misc.xml .idea/modules.xml .idea/uiDesigner.xml .idea/vcs.xml .idea/workspace.xml
