@@ -1,40 +1,62 @@
- <div ng-show="!currentUser" class="jumbotron" ng-controller="HomeController">
- 	<h1>Web crawler</h1>
- 	<p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
- 	<p><a href="#/login" class="btn btn-lg btn-success" role="button">Log in</a><a href="#/register" class="btn btn-lg btn-success" style="margin-left:10px" role="button">Register</a></p>
- </div>
- <div ng-show="currentUser" ng-controller="SearchController">
- 	<div class="panel panel-default">
- 		<div class="panel-heading">
- 			<h3 class="panel-title">Your searches</h3>
- 		</div>
- 		<div class="panel-body">
- 			<div class="list-group">
- 				<li class="list-group-item list-group-item-info"><b>Search content</b><span class="search-status" ><b>Status</b></span></li>
- 				
- 				<a href="#/search/{{q.query_id}}" class="list-group-item" ng-repeat="q in searches">
- 					{{q.query_content.length > 80 ? q.query_content.substr(0,80) + '...' : q.query_content}}
- 					<span ng-class="{running: 'label label-warning search-status', finished: 'label label-success search-status', interrupted: 'label label-danger search-status', submitted:'label label-info search-status', failed: 'label label-danger search-status' }[q.status]">{{q.status}}</span>
- 				</a>
- 				
- 			</div>
- 		</div>
- 	</div>
- 	<div class="panel panel-default">
- 		<div class="panel-heading">
- 			<h3 class="panel-title">New search</h3>
- 		</div>
- 		<div class="panel-body">
- 			<form novalidate class="simple-form">
- 				<div class="form-group">
- 					<label for="content">Content:</label>
- 					<input name="content" class="form-control" id="content" placeholder="Enter search" ng-model="search">
- 				</div>
- 				<input type="submit" class="btn btn-success" ng-click="createSearch(search)">
- 			</form>
- 			<div ng-show="error" class="alert alert-danger">{{message}}</div>
- 			<div ng-show="success" class="alert alert-success">{{message}}</div>
- 		</div>
- 	</div>
+<div ng-show="!currentUser" class="jumbotron" ng-controller="HomeController">
+    <h1>Web crawler</h1>
+    <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+    <p><a href="#/login" class="btn btn-lg btn-success" role="button">Log in</a><a href="#/register" class="btn btn-lg btn-success" style="margin-left:10px" role="button">Register</a></p>
+</div>
+<div ng-show="currentUser" ng-controller="SearchController">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Your searches</h3>
+        </div>
+        <div class="panel-body">
+            <div class="list-group">
+                <li class="list-group-item list-group-item-info"><b>Search content</b><span class="search-status" ><b>Status</b></span></li>
 
- </div>
+                <a href="#/search/{{q.query_id}}" class="list-group-item" ng-repeat="q in searches">
+                    {{q.query_content.length > 80 ? q.query_content.substr(0,80) + '...' : q.query_content}}
+                    <span ng-class="{running: 'label label-warning search-status', finished: 'label label-success search-status', interrupted: 'label label-danger search-status', submitted:'label label-info search-status', failed: 'label label-danger search-status' }[q.status]">{{q.status}}</span>
+                </a>
+
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">New search</h3>
+        </div>
+        <div class="panel-body">
+            <form name="newSearchForm" class="simple-form" role="form">
+                <div class="form-group">
+                    <label for="content">Content:</label>
+                    <input type="text" required class="form-control" id="content" placeholder="Enter search" ng-model="queryContent">
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label for="interval" class="col-md-2 control-label">Crawling interval:</label>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <input type="number" min="0" max="2692000" required name="interval" class="form-control" id="interval" placeholder="Crawling interval" ng-model="crawlingInterval">
+                                    <div class="input-group-addon">s</div>
+                                </div>
+                            </div>
+                            <label for="accuracy" class="col-md-2 control-label">Minimal accuracy:</label>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <input type="number" min="0" max="100" required name="accuracy" class="form-control" id="accuracy" placeholder="Accuracy" ng-model="accuracy">
+                                    <div class="input-group-addon">%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-success" ng-click="createSearch(queryContent, accuracy, crawlingInterval)">
+            </form>
+
+
+            <div ng-show="error" class="alert alert-danger">{{message}}</div>
+            <div ng-show="success" class="alert alert-success">{{message}}</div>
+        </div>
+    </div>
+
+</div>

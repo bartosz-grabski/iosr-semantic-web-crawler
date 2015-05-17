@@ -1,31 +1,21 @@
 <div class="row">
   <button type="submit" ng-show="!updating" ng-click="startTimedUpdates()" class="btn btn-primary">Start timed updates</button>
   <button type="submit" ng-show="updating" ng-click="stopTimedUpdates()" class="btn btn-primary">Stop timed updates</button>
+  <div ng-show="error" class="alert alert-danger">{{message}}</div>
+  <div ng-show="success" class="alert alert-success">{{message}}</div>
 </div>
 <div class="row" style="margin-top:15px">
-  <div class="panel panel-success">
+  <div class="panel panel-info">
     <!-- Default panel contents -->
     <div class="panel-heading">Search {{searchId}}</div>
 
     <!-- Table -->
     <table class="table">
       <tr>
-       <td>#</td><td>URL</td>
+       <td>#</td><td>URL</td><td>Accuracy</td><td>Clearing int. (s)</td>
      </tr>
-     <tr>
-       <td>1</td><td>www.google.pl</td>
-     </tr>
-     <tr>
-       <td>2</td><td>www.google.pl</td>
-     </tr>
-     <tr>
-       <td>3</td><td>www.google.pl</td>
-     </tr>
-     <tr>
-       <td>4</td><td>www.google.pl</td>
-     </tr>
-     <tr>
-       <td>5</td><td>www.google.pl</td>
+     <tr ng-repeat="r in results">
+       <td>{{$index}}</td><td><a href="{{r.url}}">{{r.url}}</a></td><td>{{r.accuracy_cap}}</td><td>{{r.crawling_interval}}</td>
      </tr>
    </table>
  </div>

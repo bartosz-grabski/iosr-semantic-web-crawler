@@ -16,6 +16,4 @@ services.factory('registerService', function ($http) {
 
         return service;
 
-    }
-    )
-    ;
+    });

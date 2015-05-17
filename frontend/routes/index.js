@@ -64,11 +64,6 @@ var loggedUserGET = function (req, res) {
 };
 
 
-var newSearch = function (req, res) {
-
-};
-
-
 
 module.exports = {
     index: index,
