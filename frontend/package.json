@@ -6,11 +6,12 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "express": "3.5.1",
-    "mongoose": "~3.8.8",
     "ejs": "*",
-    "nodemailer": "0.7.1",
     "email-templates": "*",
+    "express": "3.5.1",
+    "grunt-forever": "^0.4.7",
+    "mongoose": "~3.8.8",
+    "nodemailer": "0.7.1",
     "rand-token": "*"
   },
   "devDependencies": {
