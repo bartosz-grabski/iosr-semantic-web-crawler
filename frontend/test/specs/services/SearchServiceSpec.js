@@ -72,7 +72,7 @@ describe("SearchService", function() {
                 queryDetails = res;
             };
 
-            $httpBackend.expectGET(urls[0]+queryPath+query_id).respond(200, "response");
+            $httpBackend.expectGET(urls[0]+queryPath+"query_id="+query_id).respond(200, "response");
             searchService.getQueryDetails(query_id,onSuccess,onFailure);
             $httpBackend.flush();
 
@@ -94,8 +94,8 @@ describe("SearchService", function() {
 
             var urls = searchService.getNodesUrls();
 
-            $httpBackend.expectGET(urls[0]+queryPath+query_id).respond(404);
-            $httpBackend.expectGET(urls[1]+queryPath+query_id).respond(200, "response");
+            $httpBackend.expectGET(urls[0]+queryPath+"query_id="+query_id).respond(404);
+            $httpBackend.expectGET(urls[1]+queryPath+"query_id="+query_id).respond(200, "response");
             searchService.getQueryDetails(query_id,onSuccess,onFailure);
             $httpBackend.flush();
 

@@ -75,7 +75,7 @@ services.factory('searchService', function ($http, $q) {
         console.log("Getting query details for query "+ queryId);
 
         var urls = searchNodesUrls.map(function(el) {
-            el = el + "/queries/" + queryId;
+            el = el + "/queries/query_id=" + queryId;
             return el;
         });
 
