@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import pl.edu.agh.iosr.RestApp;
+import pl.edu.agh.iosr.ScrapyRunner;
 import pl.edu.agh.iosr.model.Query;
 
 import javax.ws.rs.*;
@@ -41,6 +42,7 @@ public class QueryAPI {
         try {
             Query query = RestApp.SERVER.MAPPER.readValue(json, Query.class);
             Key<Query> save = RestApp.SERVER.QUERY_DAO.save(query);
+            ScrapyRunner.deployProject(query.getQueryId(), "http://wpdressing.com,http://wp.pl");
             return Response.ok(save.getId().toString(), MediaType.APPLICATION_JSON_TYPE).header("Access-Control-Allow-Origin", "*").build();
         } catch (IOException e) {
             e.printStackTrace();

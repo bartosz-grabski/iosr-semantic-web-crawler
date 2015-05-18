@@ -6,8 +6,9 @@ import re
 class MetaSpider(scrapy.Spider):
     name = "dmoz"
 
-    def __init__(self, url_file, query_id):
-        self.start_urls = ['http://'+l.strip() for l in open(url_file).readlines()]
+    def __init__(self, urls=None, query_id=None, *args, **kwargs):
+        super(MetaSpider, self).__init__(*args, **kwargs)
+        self.start_urls = urls.split(',')
         print self.start_urls
 
     def parse(self, response):
