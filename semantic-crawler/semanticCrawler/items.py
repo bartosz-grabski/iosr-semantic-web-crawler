@@ -9,6 +9,7 @@ import scrapy
 
 
 class MetaItem(scrapy.Item):
+    query_id = scrapy.Field()
     description = scrapy.Field()
     title = scrapy.Field()
     keywords = scrapy.Field()
