@@ -55,7 +55,7 @@ describe("SearchService", function() {
             };
 
             $httpBackend.expectPOST(urls[0]+queryPath,{
-                user_id : 'user',
+                owner_id : 'user',
                 query_content: 'query',
                 crawling_interval : 3600,
                 accuracy_cap : 0.7
