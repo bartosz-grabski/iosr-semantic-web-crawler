@@ -1,8 +1,7 @@
 services.factory('searchService', function ($http, $q) {
 
     var searchNodesUrls = [
-        "http://localhost:8080",
-        "http://localhost:8081"
+        "172.17.84.122:8055/myapp",
     ];
 
     var service = {};
