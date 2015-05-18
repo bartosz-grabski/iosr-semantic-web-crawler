@@ -17,7 +17,7 @@ ITEM_PIPELINES = [
     'scrapy_mongodb.MongoDBPipeline',
     ]
 
-MONGODB_URI = 'mongodb://localhost:27017'
+MONGODB_URI = 'mongodb://172.17.84.81:27017'
 MONGODB_DATABASE = 'queries'
 MONGODB_COLLECTION = 'results'
 
