@@ -36,7 +36,7 @@ public class Query {
         this.accuracyCap = accuracyCap;
     }
 
-    @JsonProperty("crawling_inverval")
+    @JsonProperty("crawling_interval")
     public int getCrawlingInterval() {
         return crawlingInterval;
     }
