@@ -85,6 +85,6 @@ controllers.controller('SearchController', function ($scope, $location, $interva
 
 
 
-    $scope.loadSearches();
+    if ($scope.currentUser) $scope.loadSearches();
 
 });
