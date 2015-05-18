@@ -3,7 +3,7 @@
     "dbHost": "localhost",
     "dbDatabase": "geopoll",
     "crawlerUrls": [
-    	"172.17.84.122",
+    	"172.17.84.122", "172.17.84.123"
     ],
     "crawlerPort": "8055",
     "postSearchPath": [

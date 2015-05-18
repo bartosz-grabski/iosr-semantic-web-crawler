@@ -1,10 +1,12 @@
 services.factory('searchService', function ($http, $q) {
 
     var searchNodesUrls = [
-        "172.17.84.122:8055/myapp",
+        "http://172.17.84.122:8055/myapp", "http://172.17.84.123:8055/myapp"
     ];
 
     var service = {};
+
+    var queriesPath = "/queries/";
 
     /**
      *
@@ -18,7 +20,7 @@ services.factory('searchService', function ($http, $q) {
         console.log("Creating new search: "+ query + " " + crawling_interval + " " +accuracy_cap);
 
         var urls = searchNodesUrls.map(function(el) {
-            return el+"/query";
+            return el+queriesPath;
         });
 
         var acc = accuracy_cap / 100;
@@ -73,7 +75,7 @@ services.factory('searchService', function ($http, $q) {
         console.log("Getting query details for query "+ queryId);
 
         var urls = searchNodesUrls.map(function(el) {
-            el = el + "/query/" + queryId;
+            el = el + "/queries/" + queryId;
             return el;
         });
 

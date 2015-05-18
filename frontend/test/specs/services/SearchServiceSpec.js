@@ -5,6 +5,7 @@ describe("SearchService", function() {
 
     var searchService;
     var $httpBackend;
+    var queryPath="/queries/";
 
     beforeEach(module('app'));
     beforeEach(inject(function(_searchService_, _$httpBackend_) {
@@ -42,7 +43,7 @@ describe("SearchService", function() {
             var onFailure = function(){};
             var urls = searchService.getNodesUrls();
 
-            $httpBackend.expectGET(urls[0]+"/queries/"+userId).respond(200, [1,2,3]);
+            $httpBackend.expectGET(urls[0]+queryPath+userId).respond(200, [1,2,3]);
             searchService.getAllQueriesForUser(userId,onSuccess,onFailure);
             $httpBackend.flush();
 
@@ -53,7 +54,7 @@ describe("SearchService", function() {
                 query_id = res.query_id;
             };
 
-            $httpBackend.expectPOST(urls[0]+"/query",{
+            $httpBackend.expectPOST(urls[0]+queryPath,{
                 user_id : 'user',
                 query_content: 'query',
                 crawling_interval : 3600,
@@ -71,7 +72,7 @@ describe("SearchService", function() {
                 queryDetails = res;
             };
 
-            $httpBackend.expectGET(urls[0]+"/query/"+query_id).respond(200, "response");
+            $httpBackend.expectGET(urls[0]+queryPath+query_id).respond(200, "response");
             searchService.getQueryDetails(query_id,onSuccess,onFailure);
             $httpBackend.flush();
 
@@ -93,8 +94,8 @@ describe("SearchService", function() {
 
             var urls = searchService.getNodesUrls();
 
-            $httpBackend.expectGET(urls[0]+"/query/"+query_id).respond(404);
-            $httpBackend.expectGET(urls[1]+"/query/"+query_id).respond(200, "response");
+            $httpBackend.expectGET(urls[0]+queryPath+query_id).respond(404);
+            $httpBackend.expectGET(urls[1]+queryPath+query_id).respond(200, "response");
             searchService.getQueryDetails(query_id,onSuccess,onFailure);
             $httpBackend.flush();
 
