@@ -1,4 +1,4 @@
-services.factory('searchService', function ($http, $q, loginService) {
+services.factory('searchService', function ($http, $q) {
 
     var searchNodesUrls = [
         "http://localhost:8080",
@@ -82,6 +82,10 @@ services.factory('searchService', function ($http, $q, loginService) {
 
     };
 
+    service.getNodesUrls = function() {
+        return searchNodesUrls;
+    };
+
 
     var _performHttpRetryUrls = function(httpOp, onSuccess, onFailure, urls, data){
 
@@ -98,6 +102,7 @@ services.factory('searchService', function ($http, $q, loginService) {
                 .error(function() {
                     counter++;
                     if (counter < urls.length) {
+                        console.log("Retrying for another node");
                         retryOp();
                     } else {
                         deferred.reject();
