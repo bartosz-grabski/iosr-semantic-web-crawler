@@ -75,7 +75,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>pl.edu.agh.iosr.RestServer</mainClass>
+                    <mainClass>pl.edu.agh.iosr.RestApp</mainClass>
                 </configuration>
             </plugin>
         </plugins>

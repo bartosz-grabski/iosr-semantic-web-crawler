@@ -17,9 +17,10 @@ public class RestApp {
     }
 
     public static void main(String[] args) throws IOException {
-        final HttpServer server = SERVER.startServer();
+        RestApp app = new RestApp();
+        final HttpServer server = app.SERVER.startServer();
         System.out.println(String.format("Jersey app started with WADL available at "
-                + "%sapplication.wadl\nHit enter to stop it...", SERVER.BASE_URI));
+                + "%sapplication.wadl\nHit enter to stop it...", app.SERVER.BASE_URI));
         System.in.read();
         server.shutdown();
     }
