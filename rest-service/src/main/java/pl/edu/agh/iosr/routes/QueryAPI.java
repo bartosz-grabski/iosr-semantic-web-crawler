@@ -7,7 +7,11 @@ import pl.edu.agh.iosr.RestApp;
 import pl.edu.agh.iosr.model.Query;
 
 import javax.ws.rs.*;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,12 +21,14 @@ public class QueryAPI {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String get() {
+    public Response get() {
         try {
-            return RestApp.SERVER.WRITER.writeValueAsString(RestApp.SERVER.QUERY_DAO.find().asList());
+            String json = RestApp.SERVER.WRITER.writeValueAsString(RestApp.SERVER.QUERY_DAO.find().asList());
+            Response response = Response.ok(json, MediaType.APPLICATION_JSON_TYPE).header("Access-Control-Allow-Origin", "*").build();
+            return response;
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            return "error2";
+            return Response.status(500).build();
         }
     }
 

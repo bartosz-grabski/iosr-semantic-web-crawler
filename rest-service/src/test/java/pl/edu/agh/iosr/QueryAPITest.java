@@ -73,7 +73,7 @@ public class QueryAPITest {
         assertEquals(invoke1.getMediaType(), MediaType.APPLICATION_JSON_TYPE);
         assertEquals(invoke1.getStatus(), 200);
         String invoke = target.path(queryPath).request().get(String.class);
-        assertEquals(invoke, validResponse);
+        assertEquals(validResponse, invoke);
     }
 
     @Test
