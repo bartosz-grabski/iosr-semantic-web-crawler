@@ -3,10 +3,10 @@
     "dbHost": "localhost",
     "dbDatabase": "geopoll",
     "crawlerUrls": [
-    	"crawler1", "crawler2"
+    	"172.17.84.122",
     ],
-    "crawlerPort": "8080",
+    "crawlerPort": "8055",
     "postSearchPath": [
-    	"/search"
+    	"/myapp"
     ]
 }
