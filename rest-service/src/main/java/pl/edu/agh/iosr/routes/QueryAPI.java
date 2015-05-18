@@ -34,29 +34,29 @@ public class QueryAPI {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public String post(String json) {
+    public Response post(String json) {
         try {
             Query query = RestApp.SERVER.MAPPER.readValue(json, Query.class);
             Key<Query> save = RestApp.SERVER.QUERY_DAO.save(query);
-            return save.getId().toString();
+            return Response.ok(save.getId().toString(), MediaType.APPLICATION_JSON_TYPE).header("Access-Control-Allow-Origin", "*").build();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "error";
+        return Response.status(500).build();
     }
 
     @GET
     @Path("/query_id={query_id}")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
-    public String getQueryById(@PathParam("query_id") String queryId) {
+    public Response getQueryById(@PathParam("query_id") String queryId) {
         Query query = RestApp.SERVER.QUERY_DAO.get(new ObjectId(queryId));
         try {
             String result = RestApp.SERVER.WRITER.writeValueAsString(query);
-            return result;
+            return Response.ok(result, MediaType.APPLICATION_JSON_TYPE).header("Access-Control-Allow-Origin", "*").build();
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            return "mucherror";
+            return Response.status(500).build();
         }
     }
 
@@ -64,17 +64,17 @@ public class QueryAPI {
     @Path("/owner_id={owner_id}")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
-    public String getQueryByOwner(@PathParam("owner_id") String ownerId) {
+    public Response getQueryByOwner(@PathParam("owner_id") String ownerId) {
         List<ObjectId> owner_id = RestApp.SERVER.QUERY_DAO.findIds("ownerId", ownerId);
         List<Query> results = new ArrayList<>();
         for (ObjectId id : owner_id) {
             results.add(RestApp.SERVER.QUERY_DAO.get(id));
         }
         try {
-            return RestApp.SERVER.WRITER.writeValueAsString(results);
+            return Response.ok(RestApp.SERVER.WRITER.writeValueAsString(results)).header("Access-Control-Allow-Origin", "*").build();
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            return "bladblad";
+            return Response.status(500).build();
         }
     }
 
@@ -82,7 +82,7 @@ public class QueryAPI {
     @Path("/owner_id={owner_id}/status={status}")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
-    public String getQueryByOwnerAndStatus(@PathParam("owner_id") String ownerId,
+    public Response getQueryByOwnerAndStatus(@PathParam("owner_id") String ownerId,
                                            @PathParam("status") String status) {
         List<ObjectId> owner_id = RestApp.SERVER.QUERY_DAO.findIds("ownerId", ownerId);
         List<Query> results = new ArrayList<>();
@@ -93,10 +93,10 @@ public class QueryAPI {
             }
         }
         try {
-            return RestApp.SERVER.WRITER.writeValueAsString(results);
+            return Response.ok(RestApp.SERVER.WRITER.writeValueAsString(results), MediaType.APPLICATION_JSON_TYPE).header("Access-Control-Allow-Origin", "*").build();
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            return "bladblad";
+            return Response.status(500).build();
         }
     }
 }
