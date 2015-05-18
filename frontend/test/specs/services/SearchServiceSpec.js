@@ -43,7 +43,7 @@ describe("SearchService", function() {
             var onFailure = function(){};
             var urls = searchService.getNodesUrls();
 
-            $httpBackend.expectGET(urls[0]+queryPath+userId).respond(200, [1,2,3]);
+            $httpBackend.expectGET(urls[0]+queryPath+"owner_id="+userId).respond(200, [1,2,3]);
             searchService.getAllQueriesForUser(userId,onSuccess,onFailure);
             $httpBackend.flush();
 

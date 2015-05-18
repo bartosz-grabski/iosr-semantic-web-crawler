@@ -48,7 +48,7 @@ services.factory('searchService', function ($http, $q) {
         console.log("Getting search results for user ");
 
         var urls = searchNodesUrls.map(function(el) {
-            el = el + "/queries/"+userId;
+            el = el + "/queries/owner_id="+userId;
             if (options) {
                 el = el + "?"
                 for (var o in options) {
