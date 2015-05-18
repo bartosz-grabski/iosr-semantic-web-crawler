@@ -8,9 +8,10 @@ import pl.edu.agh.iosr.model.QueryDAO;
 
 import java.net.URI;
 
-public class TestServer extends RestServer{
+public class TestServer extends RestServer {
 
-    @Override
+    public static String BASE_URI = "http://localhost:8055/myapp/";
+
     public HttpServer startServer() {
         CONNECTOR = new TestDatabaseConnector();
         MAPPER = new ObjectMapper();

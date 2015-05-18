@@ -19,7 +19,7 @@ import static org.junit.Assert.fail;
 
 public class QueryAPITest {
 
-    private static RestServer SERVER = new TestServer();
+    private static TestServer SERVER = new TestServer();
     private static HttpServer server;
     private static WebTarget target;
 
@@ -36,7 +36,7 @@ public class QueryAPITest {
         // create the client
         Client c = ClientBuilder.newClient();
 
-        target = c.target(RestServer.BASE_URI);
+        target = c.target(TestServer.BASE_URI);
 
         query = new Query();
         query.setCrawlingInterval(180);

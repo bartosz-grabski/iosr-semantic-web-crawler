@@ -18,9 +18,9 @@ public class RestApp {
 
     public static void main(String[] args) throws IOException {
         RestApp app = new RestApp();
-        final HttpServer server = app.SERVER.startServer();
+        final HttpServer server = app.SERVER.startServer(args[0], args[1]);
         System.out.println(String.format("Jersey app started with WADL available at "
-                + "%sapplication.wadl\nHit enter to stop it...", app.SERVER.BASE_URI));
+                + "%sapplication.wadl\nHit enter to stop it...", args[0]));
         System.in.read();
         server.shutdown();
     }

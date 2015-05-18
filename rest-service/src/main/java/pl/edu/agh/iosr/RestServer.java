@@ -17,7 +17,7 @@ import java.net.URI;
  */
 public class RestServer {
     // Base URI the Grizzly HTTP server will listen on
-    public static final String BASE_URI = "http://172.17.84.122:8055/myapp/";
+//    public static final String BASE_URI = "http://localhost:8055/myapp/";
 
     public MongoConnector CONNECTOR;
 
@@ -32,8 +32,8 @@ public class RestServer {
      *
      * @return Grizzly HTTP server.
      */
-    public HttpServer startServer() {
-        CONNECTOR = new MongoConnector("queries", "172.17.84.81", 27017, Query.class);
+    public HttpServer startServer(String serverAddress, String dbAddress) {
+        CONNECTOR = new MongoConnector("queries", dbAddress, 27017, Query.class);
         MAPPER = new ObjectMapper();
         WRITER = MAPPER.writerWithDefaultPrettyPrinter();
         QUERY_DAO = new QueryDAO(CONNECTOR.getClient(), CONNECTOR.getMorphia(), CONNECTOR.getDbName());
@@ -43,7 +43,7 @@ public class RestServer {
 
         // create and start a new instance of grizzly http server
         // exposing the Jersey application at BASE_URI
-        return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
+        return GrizzlyHttpServerFactory.createHttpServer(URI.create(serverAddress), rc);
     }
 
 
