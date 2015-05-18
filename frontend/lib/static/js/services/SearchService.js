@@ -26,7 +26,7 @@ services.factory('searchService', function ($http, $q) {
         var acc = accuracy_cap / 100;
 
         var data = {
-            user_id: userId,
+            owner_id: userId,
             query_content: query,
             crawling_interval: crawling_interval,
             accuracy_cap: acc
