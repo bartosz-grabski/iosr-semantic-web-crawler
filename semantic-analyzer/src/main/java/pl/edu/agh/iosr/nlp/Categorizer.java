@@ -11,15 +11,28 @@ import opennlp.tools.doccat.DocumentCategorizerME;
 import opennlp.tools.util.InvalidFormatException;
 
 public class Categorizer {
-
-	public static void main(String[] args) throws InvalidFormatException, IOException{
-		InputStream is = new FileInputStream("resources/en-doccat.bin");
-		DoccatModel model = new DoccatModel(is);
-		String input = "car engine";
-		DocumentCategorizerME categorizer = new DocumentCategorizerME(model);
-		double[] outcomes = categorizer.categorize(input);
+	private DocumentCategorizer categorizer;
+	
+	public Categorizer(DoccatModel model) {
+		categorizer = new DocumentCategorizerME(model);
+	}
+	
+	public Result categorize(String text){
+		double[] outcomes = categorizer.categorize(text);
 		String category = categorizer.getBestCategory(outcomes);
-		System.out.println(category);
+		double probability = outcomes[categorizer.getIndex(category)];
+		return new Result(category, probability);
+	}
+	
+	
+	public static class Result{
+		public final String category;
+		public final double probability;
+		
+		public Result(String category, double probability) {
+			this.category = category;
+			this.probability = probability;
+		}
 	}
 	
 }
