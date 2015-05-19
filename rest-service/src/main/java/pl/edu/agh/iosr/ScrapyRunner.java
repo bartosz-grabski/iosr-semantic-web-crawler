@@ -28,7 +28,8 @@ public class ScrapyRunner {
 
     public static void deployProject(String queryId, String urls) {
         String deployCommand = "curl http://" + RestApp.SCRAPYD_ADDRESS + "/addversion.json -F project=" + queryId + " -F version=r2 -F egg=@my.egg";
-        String scheduleCommand = "curl http://" + RestApp.SCRAPYD_ADDRESS + "/schedule.json -d project=" + queryId + " -d spider=dmoz -d urls="+urls;
+        String scheduleCommand = "curl http://" + RestApp.SCRAPYD_ADDRESS + "/schedule.json -d project=" + queryId + " -d spider=dmoz -d urls="+urls
+                +" -d query_id="+queryId;
 
         executeCommand(deployCommand);
         executeCommand(scheduleCommand);
