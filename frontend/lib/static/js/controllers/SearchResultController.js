@@ -69,6 +69,8 @@ controllers.controller('SearchResultController', function ($scope, $location, $i
         var queryId = $routeParams.searchId;
 
         searchService.getQueryDetails(queryId,onSuccess,onFailure);
+        searchService.getQueryResults(queryId, onSuccess, onFailure);
+
     }
 
     initSearchResults();

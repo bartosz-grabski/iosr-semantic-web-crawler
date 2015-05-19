@@ -1,9 +1,9 @@
 {
     "dbPort": 27017,
-    "dbHost": "localhost",
+    "dbHost": "172.17.84.81",
     "dbDatabase": "geopoll",
     "crawlerUrls": [
-    	"172.17.84.122", "172.17.84.123"
+    	"192.168.16.130", "172.17.84.123"
     ],
     "crawlerPort": "8055",
     "postSearchPath": [

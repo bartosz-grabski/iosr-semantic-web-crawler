@@ -1,7 +1,7 @@
 services.factory('searchService', function ($http, $q) {
 
     var searchNodesUrls = [
-        "http://172.17.84.122:8055/myapp", "http://172.17.84.123:8055/myapp"
+        "http://172.17.84.122:8055/myapp", "http://192.168.16.130:8055/myapp"
     ];
 
     var service = {};
@@ -76,6 +76,17 @@ services.factory('searchService', function ($http, $q) {
 
         var urls = searchNodesUrls.map(function(el) {
             el = el + "/queries/query_id=" + queryId;
+            return el;
+        });
+
+        _performHttpRetryUrls($http.get, onSuccess, onFailure, urls);
+
+    };
+
+    service.getQueryResults = function(queryId, onSuccess, onFailure){
+
+        var urls = searchNodesUrls.map(function(el) {
+            el = el + "/results/query_id=" + queryId;
             return el;
         });
 
