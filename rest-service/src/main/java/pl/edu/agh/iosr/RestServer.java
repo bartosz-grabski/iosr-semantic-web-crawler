@@ -8,6 +8,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 import pl.edu.agh.iosr.model.MongoConnector;
 import pl.edu.agh.iosr.model.Query;
 import pl.edu.agh.iosr.model.QueryDAO;
+import pl.edu.agh.iosr.model.ResultDAO;
 
 import java.io.IOException;
 import java.net.URI;
@@ -27,6 +28,8 @@ public class RestServer {
 
     public QueryDAO QUERY_DAO;
 
+    public ResultDAO RESULT_DAO;
+
     /**
      * Starts Grizzly HTTP server exposing JAX-RS resources defined in this application.
      *
@@ -37,6 +40,7 @@ public class RestServer {
         MAPPER = new ObjectMapper();
         WRITER = MAPPER.writerWithDefaultPrettyPrinter();
         QUERY_DAO = new QueryDAO(CONNECTOR.getClient(), CONNECTOR.getMorphia(), CONNECTOR.getDbName());
+        RESULT_DAO = new ResultDAO(CONNECTOR.getClient(), CONNECTOR.getMorphia(), CONNECTOR.getDbName());
         // create a resource config that scans for JAX-RS resources and providers
         // in pl.edu.agh.iosr package
         final ResourceConfig rc = new ResourceConfig().packages("pl.edu.agh.iosr.routes");
