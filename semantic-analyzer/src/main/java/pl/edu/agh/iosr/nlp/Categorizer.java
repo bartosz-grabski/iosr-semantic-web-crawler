@@ -17,6 +17,18 @@ public class Categorizer {
 		categorizer = new DocumentCategorizerME(model);
 	}
 	
+	public Categorizer(){
+		FileInputStream fis = null;
+		try {
+			fis = new FileInputStream("resources/en-doccat.bin");
+			DoccatModel model = new DoccatModel(fis);
+			categorizer = new DocumentCategorizerME(model);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public Result categorize(String text){
 		double[] outcomes = categorizer.categorize(text);
 		String category = categorizer.getBestCategory(outcomes);

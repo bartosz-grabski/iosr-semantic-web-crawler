@@ -12,18 +12,20 @@ import java.util.Map.Entry;
 
 public class KeywordGetter {
 	private KeywordDocController controller;
-	private POSFilter filter;
+	private IFilter filter;
 
 	public KeywordGetter(KeywordDocController controller) {
-		this.filter = new POSFilter();
+		this.filter = new KeywordFilter();
 		this.controller = controller;
 	}
 
 	public List<String> getKeywordsForSentenceAndCategory(String category,
 			String sentence, int n) {
-		List<String> filteredWords = filter.extractKeywords(sentence);
+		String[] words = sentence.split("\\s+");
+		List<String> filteredWords = filter.extractKeywords(words);
 		List<List<String>> filteredLists = getFilteredLists(category,
 				filteredWords);
+		System.out.println(filteredWords);
 		Map<String, Integer> countMap = getCountMap(filteredLists);
 		ArrayList<Entry<String, Integer>> array = new ArrayList<Map.Entry<String, Integer>>(
 				countMap.entrySet());
@@ -44,7 +46,7 @@ public class KeywordGetter {
 		List<List<String>> list = new LinkedList<>();
 		while (it.hasNext()) {
 			List<String> coll = it.next();
-			if (isAnyInCollection(words, coll)) {
+			if (isAllInCollection(words, coll)) {
 				list.add(coll);
 			}
 		}
@@ -63,14 +65,15 @@ public class KeywordGetter {
 		return map;
 	}
 
-	private boolean isAnyInCollection(List<String> words, List<String> coll) {
+	private boolean isAllInCollection(List<String> words, List<String> coll) {
+		
 		Iterator<String> it = words.iterator();
 		while (it.hasNext()) {
-			if (coll.contains(it.next())) {
-				return true;
+			if (!coll.contains(it.next())) {
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 
 	private class EntryComparator implements Comparator<Entry<String, Integer>> {

@@ -15,7 +15,7 @@ import opennlp.tools.postag.POSTagger;
 import opennlp.tools.postag.POSTaggerME;
 import opennlp.tools.sentdetect.SentenceModel;
 
-public class POSFilter {
+public class POSFilter implements IFilter{
 
 	private POSModel model;
 	
@@ -52,15 +52,14 @@ public class POSFilter {
 		  }
 		}
 	}
-	
-	public List<String> extractKeywords(String sentence){
+		
+	public List<String> extractKeywords(String[] sentence){
 		POSTaggerME tagger = new POSTaggerME(model);
-		String[] words = sentence.split("\\s+");
-		String[] tags = tagger.tag(words);
+		String[] tags = tagger.tag(sentence);
 		List<String> keywords = new LinkedList<String>();
-		for(int i = 0; i<words.length;i++){
+		for(int i = 0; i<sentence.length;i++){
 			if(tags[i].length()>1 && allowedTags.contains(tags[i].subSequence(0, 2))){
-				keywords.add(words[i]);
+				keywords.add(sentence[i]);
 			}
 		}
 		return keywords;
