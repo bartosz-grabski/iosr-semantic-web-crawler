@@ -25,7 +25,6 @@ public class KeywordGetter {
 		List<String> filteredWords = filter.extractKeywords(words);
 		List<List<String>> filteredLists = getFilteredLists(category,
 				filteredWords);
-		System.out.println(filteredWords);
 		Map<String, Integer> countMap = getCountMap(filteredLists);
 		ArrayList<Entry<String, Integer>> array = new ArrayList<Map.Entry<String, Integer>>(
 				countMap.entrySet());

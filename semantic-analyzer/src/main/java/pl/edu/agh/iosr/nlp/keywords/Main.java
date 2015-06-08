@@ -16,10 +16,8 @@ public class Main {
 		}
 		
 		if(args[0].equals("query")){
-			Categorizer categorizer = new Categorizer();
-			Result res = categorizer.categorize(args[1]);
-			System.out.println(res.category);
-			List<String> keywords = getSimiliarKeywords(args[1], res.category, 5);
+			
+			List<String> keywords = getSimiliarKeywords(args[1], 5);
 			for(String word : keywords){
 				System.out.println(word);
 			}
@@ -33,11 +31,12 @@ public class Main {
 		
 	}
 	
-	public static List<String> getSimiliarKeywords(String query, String category, int amount){
+	public static List<String> getSimiliarKeywords(String query, int amount){
+		Categorizer categorizer = new Categorizer();
+		Result res = categorizer.categorize(query);
 		KeywordDocController kdc = new KeywordDocController();
 		KeywordGetter getter = new KeywordGetter(kdc);
-		System.out.println("!");
-		List<String> list = getter.getKeywordsForSentenceAndCategory(category,query, amount);
+		List<String> list = getter.getKeywordsForSentenceAndCategory(res.category,query, amount);
 		return list;
 	}
 	
