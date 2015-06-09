@@ -37,7 +37,7 @@ public class StopwordsFilter implements IFilter {
 	public List<String> extractKeywords(String[] words) {
 		List<String> filteredList = new LinkedList<String>();
 		for(String word : words){
-			if(!stopwords.contains(word)){
+			if(!stopwords.contains(word.toLowerCase())){
 				filteredList.add(word);
 			}
 		}
