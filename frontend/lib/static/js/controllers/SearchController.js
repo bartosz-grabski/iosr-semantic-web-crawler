@@ -34,9 +34,9 @@ controllers.controller('SearchController', function ($scope, $location, $interva
     $scope.message = "";
     //http://odetocode.com/blogs/scott/archive/2013/07/16/angularjs-listening-for-destroy.aspx
 
-    $scope.createSearch = function(query, accuracy, crawlingInterval) {
+    $scope.createSearch = function(query, accuracy, crawlingInterval, startingUrls) {
 
-        var onSuccess = function(query_id) {
+        var onSuccess = function(data) {
 
             if (!$scope.newSearchForm.$valid) {
                 $scope.error = true;
@@ -49,8 +49,10 @@ controllers.controller('SearchController', function ($scope, $location, $interva
                 $scope.searches.push( {
                     query_content: query,
                     status: "submitted",
-                    query_id : query_id,
-                    query_processed: ""
+                    query_id : data.query_id,
+                    query_processed: "",
+                    keywords : data.keywords,
+                    accuracy: accuracy / 100
                 });
             }
 
@@ -63,7 +65,7 @@ controllers.controller('SearchController', function ($scope, $location, $interva
             $scope.message = messages["errorSubmittingSearch"];
         };
 
-        searchService.postQuery(query, crawlingInterval, accuracy / 100.0, $scope.currentUser, onSuccess,onFailure);
+        searchService.postQuery(query, crawlingInterval, accuracy / 100.0, startingUrls.split(","), $scope.currentUser, onSuccess,onFailure);
 
     };
 

@@ -15,21 +15,20 @@ services.factory('searchService', function ($http, $q) {
      * @param onSuccess
      * @param onFailure
      */
-    service.postQuery = function (query, crawling_interval, accuracy_cap, userId, onSuccess, onFailure) {
+    service.postQuery = function (query, crawlingInterval, accuracyCap, startingUrls, userId, onSuccess, onFailure) {
 
-        console.log("Creating new search: "+ query + " " + crawling_interval + " " +accuracy_cap);
+        console.log("Creating new search: "+ query + " " + crawlingInterval + " " +accuracyCap);
 
         var urls = searchNodesUrls.map(function(el) {
             return el+queriesPath;
         });
 
-        var acc = accuracy_cap / 100;
-
         var data = {
             owner_id: userId,
             query_content: query,
-            crawling_interval: crawling_interval,
-            accuracy_cap: acc
+            crawling_interval: crawlingInterval,
+            accuracy_cap: accuracyCap,
+            urls: startingUrls
         };
 
         _performHttpRetryUrls($http.post, onSuccess, onFailure, urls, data)

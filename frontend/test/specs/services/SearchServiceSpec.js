@@ -58,9 +58,10 @@ describe("SearchService", function() {
                 owner_id : 'user',
                 query_content: 'query',
                 crawling_interval : 3600,
-                accuracy_cap : 0.7
+                accuracy_cap : 0.5,
+                urls : [ "url1", "url2"],
             }).respond(201, { query_id : 'id'})
-            searchService.postQuery('query', 3600, 70, 'user', onSuccess, onFailure);
+            searchService.postQuery('query', 3600, 0.5, [ "url1", "url2"], 'user', onSuccess, onFailure);
             $httpBackend.flush();
 
             assert.equal('id',query_id);

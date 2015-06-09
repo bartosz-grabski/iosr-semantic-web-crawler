@@ -22,5 +22,5 @@ module.exports = function(grunt) {
     });
 
    grunt.registerTask('start', ['karma','forever:app:start']);
-   grunt.registerTags('test', ['karma']);
+   grunt.registerTask('test', ['karma']);
 };
