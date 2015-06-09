@@ -24,9 +24,7 @@ controllers.controller('SearchResultController', function ($scope, $location, $i
             var onSuccess = function(results) {
                 $scope.error = false;
                 console.log("Successfully fetched query details");
-                for (var i = 0; i < queries.length; i++) {
-                    $scope.results = results;
-                }
+                $scope.results = results;
             };
 
             var onFailure = function() {
@@ -38,7 +36,7 @@ controllers.controller('SearchResultController', function ($scope, $location, $i
 
             var queryId = $routeParams.searchId;
 
-            searchService.getQueryDetails(queryId,onSuccess,onFailure);
+            searchService.getQueryResults(queryId,onSuccess,onFailure);
 
         }, UPDATE_INTERVAL)
     };
