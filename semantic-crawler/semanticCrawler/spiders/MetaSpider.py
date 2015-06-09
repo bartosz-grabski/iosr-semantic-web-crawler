@@ -18,8 +18,8 @@ class MetaSpider(CrawlSpider):
         Rule(extractor, callback='parse_page', follow=True),
     )
 
-    # def parse_start_url(self, response):
-    #     list(self.parse_links(response))
+    def parse_start_url(self, response):
+        list(self.parse_links(response))
 
     def parse_links(self, response):
         extract = tldextract.extract(response.url)
