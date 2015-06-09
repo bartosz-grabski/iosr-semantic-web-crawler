@@ -40,7 +40,8 @@ public class QueryAPI extends AbstractAPI{
         try {
             Query query = RestApp.SERVER.MAPPER.readValue(json, Query.class);
             Key<Query> save = RestApp.SERVER.QUERY_DAO.save(query);
-            ScrapyRunner.deployProject(query.getQueryId(), "http://wpdressing.com,http://wp.pl");
+            String uri = "http://www.dmoz.org/";
+            ScrapyRunner.deployProject(query.getQueryId(), uri, query.getQueryContent());
             return Response.ok(save.getId().toString(), MediaType.APPLICATION_JSON_TYPE).header("Access-Control-Allow-Origin", "*").build();
         } catch (IOException e) {
             e.printStackTrace();
