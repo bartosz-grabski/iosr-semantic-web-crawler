@@ -17,7 +17,9 @@ ITEM_PIPELINES = [
     'scrapy_mongodb.MongoDBPipeline',
     ]
 
-MONGODB_URI = 'mongodb://172.17.84.81:27017'
+DUPEFILTER_CLASS = 'scrapy.dupefilter.RFPDupeFilter'
+
+MONGODB_URI = 'mongodb://127.0.0.1:27017'
 MONGODB_DATABASE = 'queries'
 MONGODB_COLLECTION = 'results'
 
