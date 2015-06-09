@@ -44,8 +44,8 @@ class MetaSpider(CrawlSpider):
         item['description'] = Selector(response=response).xpath('//head//description/text()').extract()
         item['url'] = response.url
         item['query_id'] = self.query_id
-        patterns = [re.compile(r'\b'+keyword+r'\b') for keyword in self.keywords]
-        matching = [pattern for pattern in patterns if pattern.match(response.body)]
+        patterns = [re.compile(r'\b'+keyword+r'\b', re.IGNORECASE | re.MULTILINE) for keyword in self.keywords]
+        matching = [pattern for pattern in patterns if pattern.search(response.body)]
         if len(matching) > 0:
             item['keywords'] = matching
             return item
