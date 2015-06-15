@@ -34,22 +34,12 @@ public class POSFilter implements IFilter{
 	}
 	
 	private void init(){
-		InputStream modelIn=null;
+		ModelLoader loader = new ModelLoader();
 		try {
-		  modelIn = new FileInputStream("resources/en-pos-perceptron.bin");
-		  model = new POSModel(modelIn);
-		}
-		catch (IOException e) {
-		  e.printStackTrace();
-		}
-		finally {
-		  if (modelIn != null) {
-		    try {
-		      modelIn.close();
-		    }
-		    catch (IOException e) {
-		    }
-		  }
+			model = loader.loadPosModel();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 		

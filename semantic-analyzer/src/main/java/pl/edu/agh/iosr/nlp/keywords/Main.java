@@ -23,7 +23,7 @@ public class Main {
 			}
 			System.exit(0);
 		}else if(args[0].equals("feed")){
-			feedDB(args[1]);
+			createModel(args[1]);
 			
 			System.exit(0);
 		}
@@ -34,16 +34,17 @@ public class Main {
 	public static List<String> getSimiliarKeywords(String query, int amount){
 		Categorizer categorizer = new Categorizer();
 		Result res = categorizer.categorize(query);
-		KeywordDocController kdc = new KeywordDocController();
-		KeywordGetter getter = new KeywordGetter(kdc);
+		System.out.println(res.category);
+		ModelLoader loader = new ModelLoader();
+		KeywordGetter getter = new KeywordGetter(loader);
 		List<String> list = getter.getKeywordsForSentenceAndCategory(res.category,query, amount);
 		return list;
 	}
 	
-	private static void feedDB(String path){
-		KeywordDocController kdc = new KeywordDocController();
-		KeywordAdder adder = new KeywordAdder(kdc);
-		Feeder feeder = new Feeder(adder);
+	private static void createModel(String path){
+		KeywordMap keywordMap = new KeywordMap();
+		TFIDFBuilder tfidfBuilder = new TFIDFBuilder();
+		Feeder feeder = new Feeder(keywordMap,tfidfBuilder);
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new FileReader(path));
@@ -58,6 +59,9 @@ public class Main {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		ModelSaver saver = new ModelSaver();
+		saver.saveKeywordMap(keywordMap, "resources/kmap.dat");
+		saver.saveTFIDFMap(tfidfBuilder.build(), "resources/tfidf.dat");
 	}
 	
 	private static void warn(){
