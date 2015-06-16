@@ -37,14 +37,14 @@ class MetaSpider(CrawlSpider):
         self.query_id = query_id
 
     def parse_page(self, response):
-        print response.url
+        print self.keywords
         item = MetaItem()
         item['title'] = Selector(response=response).xpath('//title/text()').extract()
         item['keywords'] = Selector(response=response).xpath('//head//keywords/text()').extract()
         item['description'] = Selector(response=response).xpath('//head//description/text()').extract()
         item['url'] = response.url
         item['query_id'] = self.query_id
-        patterns = [re.compile(r'\b'+keyword+r'\b', re.IGNORECASE | re.MULTILINE) for keyword in self.keywords]
+        patterns = [re.compile(r'\b'+keyword.strip()+r'\b', re.IGNORECASE | re.MULTILINE) for keyword in self.keywords]
         matching = [pattern for pattern in patterns if pattern.search(response.body)]
         if len(matching) > 0:
             item['keywords'] = matching
