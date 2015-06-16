@@ -37,7 +37,7 @@ public class ScrapyRunner {
 
         String deployCommand = "curl http://" + RestApp.SCRAPYD_ADDRESS + "/addversion.json -F project=" + queryId + " -F version=r2 -F egg=@my.egg";
         String scheduleCommand = "curl http://" + RestApp.SCRAPYD_ADDRESS + "/schedule.json -d project=" + queryId + " -d spider=metaspider -d urls="+urls
-                +" -d query_id="+queryId + " -d keywords=" + keywordBuffer.toString();
+                +" -d query_id="+queryId + " -d keywords=" + keywordBuffer.toString().substring(0, keywordBuffer.toString().length()-1);
 
         executeCommand(deployCommand);
         executeCommand(scheduleCommand);
