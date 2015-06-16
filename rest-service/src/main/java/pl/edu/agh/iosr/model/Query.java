@@ -78,12 +78,12 @@ public class Query {
         return processedContent;
     }
     
-//    @JsonProperty("urls")
-//    public String getUrls(){ return urls;}
-//
-//    public void setUrls(String urls){
-//        this.urls = urls;
-//    }
+    @JsonProperty("urls")
+    public String getUrls(){ return urls;}
+
+    public void setUrls(String urls){
+        this.urls = urls;
+    }
 
     public void setProcessedContent(String processedContent) {
         this.processedContent = processedContent;
