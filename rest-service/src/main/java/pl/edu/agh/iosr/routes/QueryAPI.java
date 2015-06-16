@@ -7,6 +7,7 @@ import pl.edu.agh.iosr.RestApp;
 import pl.edu.agh.iosr.ScrapyRunner;
 import pl.edu.agh.iosr.model.Query;
 import pl.edu.agh.iosr.nlp.filters.POSFilter;
+import pl.edu.agh.iosr.nlp.keywords.Main;
 
 import javax.ws.rs.*;
 import javax.ws.rs.client.Entity;
@@ -22,8 +23,6 @@ import java.util.logging.Logger;
 
 @Path("/queries")
 public class QueryAPI extends AbstractAPI{
-
-    private POSFilter filter = new POSFilter();
 
     private static final Logger log = Logger.getLogger("log");
 
@@ -48,9 +47,8 @@ public class QueryAPI extends AbstractAPI{
             Query query = RestApp.SERVER.MAPPER.readValue(json, Query.class);
             Key<Query> save = RestApp.SERVER.QUERY_DAO.save(query);
             String uri = "http://www.dmoz.org/";
-            String[] sentence = query.getQueryContent().split(" ");
-            System.out.println(filter.extractKeywords(sentence));
-            ScrapyRunner.deployProject(query.getQueryId(), uri, filter.extractKeywords(sentence));
+            System.out.println(Main.getSimiliarKeywords(query.getQueryContent(), 8));
+            ScrapyRunner.deployProject(query.getQueryId(), uri, Main.getSimiliarKeywords(query.getQueryContent(), 8));
             return Response.ok(save.getId().toString(), MediaType.APPLICATION_JSON_TYPE).header("Access-Control-Allow-Origin", "*").build();
         } catch (IOException e) {
             e.printStackTrace();
