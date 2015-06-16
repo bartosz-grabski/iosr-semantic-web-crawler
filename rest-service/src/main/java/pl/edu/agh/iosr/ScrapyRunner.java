@@ -2,6 +2,7 @@ package pl.edu.agh.iosr;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.List;
 
 public class ScrapyRunner {
 
@@ -26,10 +27,17 @@ public class ScrapyRunner {
         }
     }
 
-    public static void deployProject(String queryId, String urls, String keywords) {
+    public static void deployProject(String queryId, String urls, List<String> keywords) {
+        StringBuffer keywordBuffer = new StringBuffer();
+        for (String s : keywords) {
+            keywordBuffer.append(s.trim());
+            keywordBuffer.append(",");
+        }
+
+
         String deployCommand = "curl http://" + RestApp.SCRAPYD_ADDRESS + "/addversion.json -F project=" + queryId + " -F version=r2 -F egg=@my.egg";
         String scheduleCommand = "curl http://" + RestApp.SCRAPYD_ADDRESS + "/schedule.json -d project=" + queryId + " -d spider=metaspider -d urls="+urls
-                +" -d query_id="+queryId + " -d keywords=" + keywords;
+                +" -d query_id="+queryId + " -d keywords=" + keywordBuffer.toString();
 
         executeCommand(deployCommand);
         executeCommand(scheduleCommand);
