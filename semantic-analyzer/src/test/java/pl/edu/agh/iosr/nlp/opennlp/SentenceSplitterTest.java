@@ -1,4 +1,4 @@
-package pl.edu.agh.iosr.nlp.keywords;
+package pl.edu.agh.iosr.nlp.opennlp;
 
 import java.util.List;
 
