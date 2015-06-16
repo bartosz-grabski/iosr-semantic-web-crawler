@@ -1,86 +1,62 @@
 package pl.edu.agh.iosr.nlp.keywords;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+import pl.edu.agh.iosr.nlp.filters.KeywordFilter;
+import pl.edu.agh.iosr.nlp.model.KeywordMap;
+import pl.edu.agh.iosr.nlp.model.ModelLoader;
+import pl.edu.agh.iosr.nlp.model.TFIDFMap;
 
 public class KeywordGetter {
-	private KeywordDocController controller;
-	private IFilter filter;
 
-	public KeywordGetter(KeywordDocController controller) {
-		this.filter = new KeywordFilter();
-		this.controller = controller;
+	private TFIDFMap tfidfMap;
+	private KeywordMap keywordMap;
+	private KeywordFilter keywordFilter;
+	
+	
+	public KeywordGetter(ModelLoader loader) {
+		tfidfMap = loader.loadTFIDFMap();
+		keywordMap = loader.loadKeywordMap();
+		keywordFilter = new KeywordFilter();
 	}
-
+	
 	public List<String> getKeywordsForSentenceAndCategory(String category,
-			String sentence, int n) {
-		String[] words = sentence.split("\\s+");
-		List<String> filteredWords = filter.extractKeywords(words);
-		List<List<String>> filteredLists = getFilteredLists(category,
-				filteredWords);
-		Map<String, Integer> countMap = getCountMap(filteredLists);
-		ArrayList<Entry<String, Integer>> array = new ArrayList<Map.Entry<String, Integer>>(
-				countMap.entrySet());
-		Collections.sort(new ArrayList<>(countMap.entrySet()),
-				new EntryComparator());
-		List<String> finalList = new LinkedList<>();
-		for (int i = 0; i < n && i < array.size(); i++) {
-			finalList.add(array.get(i).getKey());
-		}
-		return finalList;
-
-	}
-
-	private List<List<String>> getFilteredLists(String category,
-			List<String> words) {
-		Iterator<List<String>> it = controller
-				.getCategoryKeywordsIterator(category);
-		List<List<String>> list = new LinkedList<>();
-		while (it.hasNext()) {
-			List<String> coll = it.next();
-			if (isAllInCollection(words, coll)) {
-				list.add(coll);
+			String query, int amount) {
+		List<Set<String>> keywords = keywordMap.getCategoryWords(category);
+		List<String> splitedQuery = keywordFilter.extractKeywords(query.split(" "));
+		SortedSet<String> keywordsSet = new TreeSet<String>(new KeywordComparator());
+		for(Set<String> sentence : keywords){
+			if(sentence.containsAll(splitedQuery)){
+				keywordsSet.addAll(sentence);
 			}
 		}
-		return list;
-	}
-
-	private Map<String, Integer> getCountMap(List<List<String>> keywords) {
-		Map<String, Integer> map = new HashMap<>();
-		for (List<String> set : keywords) {
-			for (String word : set) {
-				Integer count = map.getOrDefault(word, 0);
-				count++;
-				map.put(word, count);
-			}
+		Iterator<String> it = keywordsSet.iterator();
+		int i = 0;
+		List<String> retval = new LinkedList<String>();
+		while(it.hasNext() && i < amount){
+			retval.add(it.next());
+			i++;
 		}
-		return map;
+		Collections.reverse(retval);
+		return retval;
 	}
-
-	private boolean isAllInCollection(List<String> words, List<String> coll) {
-		
-		Iterator<String> it = words.iterator();
-		while (it.hasNext()) {
-			if (!coll.contains(it.next())) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	private class EntryComparator implements Comparator<Entry<String, Integer>> {
+	
+	private class KeywordComparator implements Comparator<String>{
 
 		@Override
-		public int compare(Entry<String, Integer> o1, Entry<String, Integer> o2) {
-			return o2.getValue().compareTo(o1.getValue());
+		public int compare(String o1, String o2) {
+			return tfidfMap.getMetric(o2).compareTo(tfidfMap.getMetric(o1));
 		}
-
+		
 	}
+	
+	
 }
