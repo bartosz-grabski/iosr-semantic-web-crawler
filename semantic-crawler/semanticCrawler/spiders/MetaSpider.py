@@ -15,7 +15,7 @@ class MetaSpider(CrawlSpider):
     extractor = LxmlLinkExtractor(unique=True)
 
     rules =  (
-        Rule(extractor, callback='parse_page', follow=True),
+        Rule(extractor, callback='parse_page', follow=False),
     )
 
     def parse_start_url(self, response):
