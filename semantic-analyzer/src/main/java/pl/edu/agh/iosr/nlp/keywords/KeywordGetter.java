@@ -2,7 +2,6 @@ package pl.edu.agh.iosr.nlp.keywords;
 
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,9 +10,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import pl.edu.agh.iosr.nlp.filters.KeywordFilter;
-import pl.edu.agh.iosr.nlp.model.KeywordMap;
-import pl.edu.agh.iosr.nlp.model.ModelLoader;
-import pl.edu.agh.iosr.nlp.model.TFIDFMap;
 
 public class KeywordGetter {
 

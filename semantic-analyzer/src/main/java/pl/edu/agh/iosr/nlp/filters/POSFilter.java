@@ -1,20 +1,14 @@
 package pl.edu.agh.iosr.nlp.filters;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
 import opennlp.tools.postag.POSModel;
-import opennlp.tools.postag.POSTagger;
 import opennlp.tools.postag.POSTaggerME;
-import opennlp.tools.sentdetect.SentenceModel;
-import pl.edu.agh.iosr.nlp.model.ModelLoader;
+import pl.edu.agh.iosr.nlp.keywords.ModelLoader;
 
 public class POSFilter implements IFilter{
 

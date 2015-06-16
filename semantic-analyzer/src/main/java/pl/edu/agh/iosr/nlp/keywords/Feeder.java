@@ -1,4 +1,4 @@
-package pl.edu.agh.iosr.nlp.model;
+package pl.edu.agh.iosr.nlp.keywords;
 
 import java.util.HashSet;
 import java.util.List;

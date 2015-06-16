@@ -6,11 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
-import pl.edu.agh.iosr.nlp.model.Feeder;
-import pl.edu.agh.iosr.nlp.model.KeywordMap;
-import pl.edu.agh.iosr.nlp.model.ModelLoader;
-import pl.edu.agh.iosr.nlp.model.ModelSaver;
-import pl.edu.agh.iosr.nlp.model.TFIDFBuilder;
 import pl.edu.agh.iosr.nlp.opennlp.Categorizer;
 import pl.edu.agh.iosr.nlp.opennlp.Categorizer.Result;
 
