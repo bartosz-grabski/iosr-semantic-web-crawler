@@ -1,6 +1,7 @@
 package pl.edu.agh.iosr.routes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import jersey.repackaged.com.google.common.collect.Lists;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import pl.edu.agh.iosr.RestApp;
@@ -47,8 +48,10 @@ public class QueryAPI extends AbstractAPI{
             Query query = RestApp.SERVER.MAPPER.readValue(json, Query.class);
             Key<Query> save = RestApp.SERVER.QUERY_DAO.save(query);
             String uri = "http://www.dmoz.org/";
-            System.out.println(Main.getSimiliarKeywords(query.getQueryContent(), 8));
-            ScrapyRunner.deployProject(query.getQueryId(), uri, Main.getSimiliarKeywords(query.getQueryContent(), 8));
+            List<String> similiarKeywords = Main.getSimiliarKeywords(query.getQueryContent(), 8);
+            List<String> keywrods = similiarKeywords.isEmpty() ? Lists.newArrayList(query.getQueryContent().split(" ")) : similiarKeywords;
+            System.out.println();
+            ScrapyRunner.deployProject(query.getQueryId(), uri, keywrods);
             return Response.ok(save.getId().toString(), MediaType.APPLICATION_JSON_TYPE).header("Access-Control-Allow-Origin", "*").build();
         } catch (IOException e) {
             e.printStackTrace();
