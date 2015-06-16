@@ -49,9 +49,10 @@ public class QueryAPI extends AbstractAPI{
             Key<Query> save = RestApp.SERVER.QUERY_DAO.save(query);
             String uri = "http://www.dmoz.org/";
             List<String> similiarKeywords = Main.getSimiliarKeywords(query.getQueryContent(), 8);
-            List<String> keywrods = similiarKeywords.isEmpty() ? Lists.newArrayList(query.getQueryContent().split(" ")) : similiarKeywords;
-            System.out.println();
-            ScrapyRunner.deployProject(query.getQueryId(), uri, keywrods);
+            similiarKeywords.addAll(Lists.newArrayList(query.getQueryContent().split(" ")));
+//            List<String> keywrods = similiarKeywords.isEmpty() ? Lists.newArrayList(query.getQueryContent().split(" ")) : similiarKeywords;
+            System.out.println(similiarKeywords);
+            ScrapyRunner.deployProject(query.getQueryId(), uri, similiarKeywords);
             return Response.ok(save.getId().toString(), MediaType.APPLICATION_JSON_TYPE).header("Access-Control-Allow-Origin", "*").build();
         } catch (IOException e) {
             e.printStackTrace();
