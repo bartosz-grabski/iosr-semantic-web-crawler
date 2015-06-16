@@ -6,6 +6,8 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import pl.edu.agh.iosr.nlp.filters.StopwordsFilter;
+
 public class StopwordsFilterTest {
 	StopwordsFilter filter = new StopwordsFilter();
 	

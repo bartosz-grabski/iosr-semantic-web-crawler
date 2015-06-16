@@ -1,4 +1,4 @@
-package pl.edu.agh.iosr.nlp.keywords;
+package pl.edu.agh.iosr.nlp.filters;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

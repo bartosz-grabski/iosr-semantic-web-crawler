@@ -10,6 +10,11 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import pl.edu.agh.iosr.nlp.filters.KeywordFilter;
+import pl.edu.agh.iosr.nlp.model.KeywordMap;
+import pl.edu.agh.iosr.nlp.model.ModelLoader;
+import pl.edu.agh.iosr.nlp.model.TFIDFMap;
+
 public class KeywordGetter {
 
 	private TFIDFMap tfidfMap;

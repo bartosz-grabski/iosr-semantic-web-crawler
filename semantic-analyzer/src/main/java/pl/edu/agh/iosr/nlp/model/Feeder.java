@@ -1,8 +1,12 @@
-package pl.edu.agh.iosr.nlp.keywords;
+package pl.edu.agh.iosr.nlp.model;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import pl.edu.agh.iosr.nlp.filters.IFilter;
+import pl.edu.agh.iosr.nlp.filters.KeywordFilter;
+import pl.edu.agh.iosr.nlp.opennlp.SentenceSplitter;
 
 public class Feeder {
 	

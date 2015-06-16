@@ -1,4 +1,4 @@
-package pl.edu.agh.iosr.nlp.keywords;
+package pl.edu.agh.iosr.nlp.model;
 
 import java.io.FileInputStream;
 import java.io.IOException;

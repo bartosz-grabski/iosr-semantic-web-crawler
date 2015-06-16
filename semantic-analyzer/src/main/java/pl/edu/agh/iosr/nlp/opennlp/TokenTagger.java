@@ -1,4 +1,4 @@
-package pl.edu.agh.iosr.nlp;
+package pl.edu.agh.iosr.nlp.opennlp;
 
 import java.io.FileInputStream;
 import java.io.InputStream;

@@ -1,4 +1,4 @@
-package pl.edu.agh.iosr.nlp.keywords;
+package pl.edu.agh.iosr.nlp.filters;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -14,6 +14,7 @@ import opennlp.tools.postag.POSModel;
 import opennlp.tools.postag.POSTagger;
 import opennlp.tools.postag.POSTaggerME;
 import opennlp.tools.sentdetect.SentenceModel;
+import pl.edu.agh.iosr.nlp.model.ModelLoader;
 
 public class POSFilter implements IFilter{
 
