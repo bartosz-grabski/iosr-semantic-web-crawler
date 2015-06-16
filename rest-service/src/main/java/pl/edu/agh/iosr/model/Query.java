@@ -17,7 +17,7 @@ public class Query {
     private int crawlingInterval;
     private double accuracyCap;
     private String status;
-    private String urls;
+    private String[] urls;
 
     @JsonProperty("query_id")
     public String getQueryId() {
@@ -79,9 +79,9 @@ public class Query {
     }
     
     @JsonProperty("urls")
-    public String getUrls(){ return urls;}
+    public String[] getUrls(){ return urls;}
 
-    public void setUrls(String urls){
+    public void setUrls(String[] urls){
         this.urls = urls;
     }
 
